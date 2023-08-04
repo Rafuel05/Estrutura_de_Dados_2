@@ -10,7 +10,7 @@ ola: clean
 	@echo  "PROGRAMA OLA"
 	@echo "======================="
 	@echo "Compilando o programa Ola mundo"
-	gcc arquivo.c -o ola 
+	gcc ponteiro_duplo.c -o ola 
 	@echo "Tornando o programa ola mundo executavel"
 	chmod +x ola
 	@echo "executando o programa olamundo"
