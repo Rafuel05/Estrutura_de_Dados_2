@@ -1,32 +1,57 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "LinkedList.h"
+#include "log.h"
 
 void init(LinkedList *list) {
+    log_trace("init->");
+    log_info("inciando a lista");
     list->first=NULL; //aponta o inicio de lista 
     list->size=0;     //tamanho da lista = 0
+    log_debug("list->first = %p", list->first);
+    log_debug("list->size = %d",list->size);
+    log_trace("<-init");
 }
 
 int enqueue(LinkedList *list, void *data) {
-    Node *newNode = (Node*)malloc(sizeof(Node));  //aloca memoria para o novo nó
-    if (newNode==NULL) return -1; //caso de erro e nao tenha memoria necessaria para alocar um novo nó
+    log_trace("enqueue->");
+    log_info("enfileirando");
+    Node *newNode = (Node*)malloc(sizeof(Node)); //aloca memoria para o novo nó
+    if (newNode==NULL) {
+    log_debug("newNode: %p", newNode);    
+    log_warn("não foi possivel alocar memoria");
+    log_trace("<-enqueue");
+    return -1;
+    } 
     newNode ->data = data; //coloca o conteudo passado dentro do no
     newNode ->next = NULL; // aponta o ponteiro next (ou prox elemento), vai ser null 
+    log_debug("newNode->data = %p",newNode->data);
+    log_debug("newNode->next = %p", newNode->next);
 
-    if (isEmpty (list)) list -> first = newNode; //caso a fila estiver vazia, o novo nó é o primeiro 
+    if (isEmpty (list))
+    {
+         list -> first = newNode; //caso a fila estiver vazia, o novo nó é o primeiro
+         log_debug("list->first = %p",list->first); 
+    }
     else {
-    Node *aux = list -> first; //auxiliar recebe o primeiro elemento atual 
+    Node *aux = list -> first; //auxiliar recebe o primeiro elemento atual
+    log_debug("aux = list ->first = %p",aux); 
     while (aux->next != NULL){ //enquanto não for o último nó
-        aux = aux ->next;      //aux avança para o nó seguinte 
+        aux = aux ->next;      //aux avança para o nó seguinte
+        log_debug("aux = aux->next = %p", aux); 
         }
         aux ->next = newNode;  //ultimo nó aponta para o novo nó
     }
 
     list->size++;              //tamanho da lista atualizada 
     return 1;                  //deu certo
+    log_info("enfileiramento executado com sucesso");
+    log_trace("<-enqueue");
 }
 bool isEmpty(LinkedList *list) {
+    log_trace("isEmpty->");
     return (list->size==0);
+    log_trace("<-isEmpty");
 }
 
 void* dequeue(LinkedList *list)
@@ -53,13 +78,8 @@ void* last(LinkedList *list)
         Node *auxNode = list ->first; //nó auxiliar recebe o ponteiro do primeiro nó
         while (auxNode->next != NULL)
         {
-            auxNode = auxNode -> next; //ponteiro auxiliar recebe o prox elemento 
-            data = auxNode -> data;    // troca o elemento atual pelo prox 
+            auxNode = auxNode -> next; //ponteiro auxiliar recebe o prox elemento  
         }
-        return data; 
+        return auxNode->data; 
     }
-}
-int push(LinkedList *list, void *data)
-{
-    
 }
