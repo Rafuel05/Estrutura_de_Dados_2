@@ -24,7 +24,7 @@ int main() {
 	enqueue(&lista, numero);
 	numero = malloc(sizeof(int));
 	*numero = 20;
-	enqueue(&lista, numero);
+	push(&lista, numero);
 	numero = malloc(sizeof(int));
 	*numero = 30;
 	enqueue(&lista, numero);	
@@ -35,6 +35,8 @@ int main() {
 	printf("%d removido\n", *numero);
 	numero = (int*)dequeue(&lista);
 	printf("%d removido\n", *numero);	
+	numero = (int*)dequeue(&lista);
+	printf("%d removido\n", *numero);
 	dequeue(&lista);
 
 	return EXIT_SUCCESS;

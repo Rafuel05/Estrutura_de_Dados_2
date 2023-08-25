@@ -23,3 +23,16 @@ clean:
 	@echo "Removendo o programa olamundo"
 	rm -f ola
 	@echo "======================="
+linkedlist:clean
+	@echo
+	@echo ==========================
+	@echo      LISTA SIMPLES
+	@echo ==========================
+	@echo Compilando o programa linkedlist
+	@gcc --std=c99 -DLOG_USE_COLOR log.h log.c LinkedList.h LinkedList.c LinkedListTest.c -o linkedlist
+	@echo Tornando o arquivo executável
+	@chmod +x linkedlist
+	@echo Executando o programa linkedlist
+	@echo ======================================================
+	@echo
+	@./linkedlist

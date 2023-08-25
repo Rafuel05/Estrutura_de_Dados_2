@@ -56,13 +56,17 @@ bool isEmpty(LinkedList *list) {
 
 void* dequeue(LinkedList *list)
 {
+    log_trace("dequeue->");
+    log_info("desinfileirando");
     if (isEmpty(list)) return NULL; //se a lista estiver vazia    
     Node *trash = list -> first; // trash (elemento lixeira) recebe o primeiro elemento 
     list ->first = list ->first ->next;  // o primeiro elemento se torna o next (2)
     void *data = trash -> data; //joga o elemento do nó no lixo
     list ->size--; //att o tamanho da lista
     free (trash); // limpa o lixo
-    return data;  
+    return data;
+    log_info("desenfileiramento realizado com sucesso");
+    log_trace("<-dequeue");
 }
 
 void* first(LinkedList *list) //descobre o primeiro elemento 
@@ -83,3 +87,48 @@ void* last(LinkedList *list)
         return auxNode->data; 
     }
 }
+
+ int push(LinkedList *list, void *data)
+ {
+    log_trace("push->");
+    log_info("empilhando");
+    Node *newNode = (Node*)malloc(sizeof(Node)); //aloca memoria para o novo nó
+    if (newNode==NULL) {
+    log_debug("newNode: %p", newNode);    
+    log_warn("não foi possivel alocar memoria");
+    log_trace("<-push");
+    return 0;
+    }
+    if(isEmpty(list)) {
+        newNode->data = data; 
+        list->first = newNode;
+        }
+        else 
+        {
+        newNode->data = data;    
+        newNode->next = list->first;
+        log_debug("newNode->next =list->first");
+        list-> first = newNode;
+        log_debug("list->first = newNode");
+        }
+        list->size++;
+        log_info("newNode empilhado com sucesso");
+        log_trace("<-push");
+        return 1;
+ }
+ void* pop(LinkedList *list)
+ {
+    log_trace("pop ->");
+    log_info("removendo do topo da pilha");
+    Node *data = dequeue(list);
+    log_trace ("<-pop");
+    return data; 
+ }
+ void* top(LinkedList *list)
+ {
+    log_trace("top->");
+    log_info("informando o elemento do topo da pilha");
+    Node *data = first(list);
+    log_trace("<-top");
+    return data;
+ }
