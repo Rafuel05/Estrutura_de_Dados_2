@@ -132,3 +132,48 @@ void* last(LinkedList *list)
     log_trace("<-top");
     return data;
  }
+ int indexOf(LinkedList *list, void *data, compare equal)
+ {
+    log_trace("indexOf->");
+    if(isEmpty(list)) return -1;
+    Node *auxNode = list ->first;
+    log_debug("auxNode = list-> first = %p", auxNode);
+    int cont = 0;
+    while (auxNode!=NULL && !equal(auxNode -> data, data))
+    {
+        auxNode = auxNode -> next;
+        cont++;
+    }
+    log_trace("<-indexOf");
+    return (aux==NULL)?-1:count;
+ }
+ Node* getNodeByPos(LinkedList *list, int pos) 
+ {
+  log_trace("getNodeByPos->");
+  if (isEmpty(list) || pos>=list->size) return NULL;
+  Node *aux = list->first;
+  for (int count=0;(aux!=NULL && count<pos);count++,aux=aux->next);
+  return aux;
+  log_trace("<-getNodeByPos");
+}
+void* getPos(LinkedList *list, int pos)
+ {
+  log_trace("getPos->");
+  Node *aux = getNodeByPos(list,pos);
+  if (aux==NULL)
+  {
+    log_trace("<-getPos");
+    return NULL;
+  }
+  else
+  {
+    log_trace("<-getPos");
+    return aux->data;
+  }
+}
+int add(LinkedList *list, int pos, void *data)
+{
+    if (pos<=0) push(lista,data);
+    Node *aux = getNodeByPos(list, (pos-1));
+    if (aux==NULL) return -2;
+}
