@@ -36,3 +36,16 @@ linkedlist:clean
 	@echo ======================================================
 	@echo
 	@./linkedlist
+doublylinkedlist:clean
+	@echo
+	@echo ==========================
+	@echo      LISTA DUPLAMENTE LIGADA
+	@echo ==========================
+	@echo Compilando o programa linkedlist
+	@gcc --std=c99 -DLOG_USE_COLOR log.h log.c DoublyLinkedList.h DoublyLinkedList.c DoublyLinkedListTest.c -o doublylinkedlist
+	@echo Tornando o arquivo executável
+	@chmod +x doublylinkedlist
+	@echo Executando o programa doublylinkedlist
+	@echo ======================================================
+	@echo
+	@./doublylinkedlist

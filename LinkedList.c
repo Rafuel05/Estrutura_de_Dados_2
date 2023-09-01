@@ -173,7 +173,90 @@ void* getPos(LinkedList *list, int pos)
 }
 int add(LinkedList *list, int pos, void *data)
 {
+    log_trace("add->");
     if (pos<=0) push(lista,data);
     Node *aux = getNodeByPos(list, (pos-1));
     if (aux==NULL) return -2;
+    log_trace("<-add");
+}
+int addAll(LinkedList *listDest, int pos, LinkedList *listSource)
+{
+    log_trace("addAll->");
+if (listDest==NULL || isEmpty(listDest)) 
+{
+    log_trace("<-addAll");
+    return -1;
+}
+if (listSource==NULL || isEmpty(listSource)) 
+{
+    log_trace("<-addAll");
+    return -2;
+}
+Node *last =NULL;
+for(last = listSource->first;last->next!=NULL;last=last->next);
+if (pos == 0) {
+  last->next = listDest->first;
+  listDest->first = listSource->first;
+} else {
+    Node *aux = getNodeByPos(listDest, (pos-1));
+    if (aux==NULL) return -3;
+    last->next = aux->next;
+    aux->next = listSource->first;
+  }
+  listDest->size+=listSource->size;
+  log_trace("<-addAll");
+  return listSource->size;
+}
+void* removePos(LinkedList *list, int pos)
+{
+    log_trace("removePos->");
+    if(isEmpty(list) || pos->size = 0;) return -1;
+    Node *nodeRemove = NULL;
+    Node *nodeAux = NULL;
+    if (pos<=0){
+    log_trace("<-removePos");
+    return dequeue(list);
+    }
+  else
+    aux = getNodeByPos(list, pos-1);
+  nodeRemove = aux->next;
+  aux->next = nodeRemove->next;
+  void* dataRemove = nodeRemove->data;
+  free(nodeRemove);
+  list->size--;
+  log_trace("<-removePos")
+  return dataRemove;
+}
+bool removeData(LinkedList *list, void *data, compare equal)
+{
+log_trace("removeData->");
+ if (isEmpty(list)) return -1;
+
+    Node *nodeRemove = NULL;
+    if (equal(list->first->data,data)) {
+        nodeRemove = list->first;
+        list->first = list->first->next;
+        free(nodeRemove->data);
+        free(nodeRemove);
+        list->size--;
+        log_trace("<-removeData");
+        return true;
+    } else {
+        Node *aux = list->first;
+        while(aux->next!=NULL && !equal(aux->next->data,data))
+            aux=aux->next;
+
+        if (aux->next!=NULL) {
+            Node *nodeRemove = aux->next;
+            aux->next = nodeRemove->next;
+            free(nodeRemove->data);
+            free(nodeRemove);
+            list->size--;
+            log_trace("<-removeData");
+            return true;
+        } else {
+            log_trace("<-removeData");
+            return false;
+        }
+    }
 }
