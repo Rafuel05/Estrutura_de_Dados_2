@@ -6,6 +6,7 @@ int addAtom(Node **list, int atom)
 {
     log_trace("addAtom->");
     Node *newNode = (Node*)malloc(sizeof(Node));
+    node->type=0;
     newNode -> atomList.atom = atom;
     newNode ->next = NULL;
 
@@ -26,15 +27,16 @@ Node* head(Node *list);
 Node* tail(Node *list);
 void show(Node *list)
 {
-    log_trace ("addList->");
-    printf("(");
-    Node *auxNode = list;
-    while (auxNode!=NULL){
-         printf(" %d",auxNode->atomList.atom);
-        auxNode = auxNode -> next;
+ printf("( ");
+    Node *aux = NULL;
+    for (aux = list; aux!=NULL; aux=aux->next) {
+        if (aux->type==0) {
+            printf("%d ",aux->atomList.atom);
+        } else {
+            showGeneralizedList(aux->atomList.list);
+        }
     }
     printf(")");
-    log_trace ("<-addList");
 }
 boolean search(Node *list, int atom);
 int depth(Node *list);
