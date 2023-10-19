@@ -49,3 +49,17 @@ doublylinkedlist:clean
 	@echo ======================================================
 	@echo
 	@./doublylinkedlist
+
+Hash:clean 
+	@echo
+	@echo ==========================
+	@echo      TRABALHO HASH 
+	@echo ==========================
+	@echo Compilando o programa PictureHash
+	@gcc -std=c99  -DLOG_USE_COLOR log.h log.c Hash.h Hash.c DoublyLinkedList.h DoublyLinkedList.c PictureHash.c  -o Hash
+	@echo Tornando o arquivo executável 
+	@chmod +x Hash
+	@echo Executando o programa Hash 
+	@echo ======================================================
+	@echo
+	@./Hash 
