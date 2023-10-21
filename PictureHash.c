@@ -3,20 +3,21 @@
 #include <string.h>
 #include "Hash.h"
 
-bool comparador (void* data1,void* data2)
+bool comparador (void* data_1,void* data_2)
 {
-    if(strcmp (data1,data2)==0) return true;
+    if(strcmp (data_1,data_2)==0) return true;
     else return false;
 }
 void printar (void* data)
 {
-  printf("%s",*((char*)data));
+  char* string_data = (char*)data;
+  if (string_data) printf("%s",string_data);
 }
 void main ()
 {
     FILE * hash;
     char *linha;
-    hash = fopen ("ListaDePalavrasPT.txt","r");
+    hash = fopen ("teste.txt","r");
     HashStruct tabela_hash;
     initHash(&tabela_hash);
     if (hash){
