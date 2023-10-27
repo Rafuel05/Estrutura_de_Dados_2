@@ -97,3 +97,42 @@ void showHashStruct(HashStruct *hashStruct, printNode print) {
     }
     log_trace("Saindo showHashStruct");
 }
+int put_2(HashStruct *hashStruct, char *key, void *data, compare equal)  {
+    log_trace("Entrando em put_2");
+    log_info("Adicionando novo elemento no Hash");
+    if (!containsKey_2(hashStruct, key, equal)) {
+        //adiciona na fila que está na posição devolvida pela função hash
+        int res = enqueue(&hashStruct->hashes[hash_2(key)],data);
+        //incrementa a qtde de elementos baseado na quantidade inserida por enqueue
+        hashStruct->size+=res;
+        return res;
+    }
+
+    log_trace("Saindo de put");
+    return 0;
+}
+bool containsKey_2(HashStruct *hashStruct, char *key, compare equal) {
+    log_trace("Entrando em containsKey_2");
+    //calcula a posição
+    int hashValue = hash_2(key);
+    //busca na fila a posição da chave
+    int pos = indexOf(&hashStruct->hashes[hashValue], key, equal); 
+    log_debug("Posição na lista %d: %d", hashValue, pos);
+    log_trace("Saindo de containsKey_2");
+    return (pos!=-1)?true:false;
+}
+int hash_2(char *key) {
+    log_trace("Entrando em hash_2");
+    int sum = 0;
+    // percorremos todos os caracteres da string passada
+    for (int i = 0; key[i]!=0;i++) {
+         //acumulamos os códigos ascii de cada letra com um peso
+        sum+=key[i]*sum*MAX;
+    }
+    log_debug("key: %s", key);
+    log_debug("sum: %d", sum);
+    int hashvalue = sum%MAX;
+    log_debug("Hash: %d", hashvalue);
+    log_trace("Saindo de hash_2");
+    return hashvalue; //retorna o resto da divisão
+}

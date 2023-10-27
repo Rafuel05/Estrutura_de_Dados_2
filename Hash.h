@@ -16,5 +16,8 @@ bool containsKey(HashStruct *hashStruct, char *key, compare equal);
 void* get(HashStruct *hashStruct, char *key, compare equal);
 void* removeKey(HashStruct *hashStruct, char *key, compare equal);
 void showHashStruct(HashStruct *hashStruct, printNode print);
+bool containsKey_2(HashStruct *hashStruct, char *key, compare equal);
+int hash_2(char *key);
+int put_2(HashStruct *hashStruct, char *key, void *data, compare equal);
 
 #endif
