@@ -127,7 +127,7 @@ int hash_2(char *key) {
     // percorremos todos os caracteres da string passada
     for (int i = 0; key[i]!=0;i++) {
          //acumulamos os códigos ascii de cada letra com um peso
-        sum+=key[i]*sum*MAX;
+        sum += (key[i] - 'A' + 1) * (i + 2);
     }
     log_debug("key: %s", key);
     log_debug("sum: %d", sum);
