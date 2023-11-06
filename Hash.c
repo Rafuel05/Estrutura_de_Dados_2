@@ -127,7 +127,7 @@ int hash_2(char *key) {
     // percorremos todos os caracteres da string passada
     for (int i = 0; key[i]!=0;i++) {
          //acumulamos os códigos ascii de cada letra com um peso
-        sum += (key[i]) * (i + 3);
+        sum += (key[i]) * (i + 3 - i / key [i]);
     }
     log_debug("key: %s", key);
     log_debug("sum: %d", sum);
@@ -136,49 +136,6 @@ int hash_2(char *key) {
     log_trace("Saindo de hash_2");
     return hashvalue; //retorna o resto da divisão
 }
-
-
-
-void createCollisionImage(const HashStruct *hashStruct, const char *filename) {
-    FILE *imageFile = fopen(filename, "w");
-
-    if (imageFile) {
-        int max_density = 0;
-
-        // Encontre a densidade máxima na tabela
-        for (int i = 0; i < MAX; i++) {
-            int density = hashStruct->hashes[i].size;
-            max_density = (density > max_density) ? density : max_density;
-        }
-
-        // Escreva o cabeçalho PPM no arquivo
-        fprintf(imageFile, "P3\n");
-        fprintf(imageFile, "32 32\n"); // Largura (32) x Altura (32)
-        fprintf(imageFile, "255\n");   // Valor máximo de cor
-
-        for (int i = 0; i < 32; i++) {
-            for (int j = 0; j < 32; j++) {
-                int density = hashStruct->hashes[i * 32 + j].size;
-
-                // Calcule o valor de cor com base na densidade de colisões
-                int color = (int)((density / (double)max_density) * 255);
-
-                // Escreva o valor de cor no arquivo PPM
-                fprintf(imageFile, "%d 0 0 ", color);
-            }
-        }
-
-        fclose(imageFile);
-        printf("Imagem PPM gerada com sucesso: %s\n", filename);
-    } else {
-        printf("Erro ao criar o arquivo de imagem PPM.\n");
-    }
-}
-
-
-
-
-
 
 
 

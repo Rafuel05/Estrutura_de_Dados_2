@@ -31,9 +31,7 @@ void main ()
       linha = (char*)malloc(sizeof(char) * 100);
     }
     }
-    //showHashStruct(&tabela_hash,printar);
     fclose (hash);
-    printf ("\ngit stat===========\nSegunda tabela Hash\n============\n");
     FILE * hash_2;
     hash_2 = fopen ("ListaDePalavrasPT.txt","r");
     HashStruct tabela_hash_2;
@@ -41,14 +39,46 @@ void main ()
     if (hash_2){
         linha = (char*)malloc(sizeof(char) * 100);
       while (fscanf(hash_2,"%s \n",linha ) !=EOF  ){
-  
-    
       put_2 (&tabela_hash_2,linha,linha,comparador);
       linha = (char*)malloc(sizeof(char) * 100);
     }
     }
-    //showHashStruct(&tabela_hash_2,printar);
-    createCollisionImage(&tabela_hash, "imagem_tabela1.ppm");
-    createCollisionImage(&tabela_hash_2, "imagem_tabela2.ppm");
+    createCollisionImage(&tabela_hash, "PictureTableHash_1.ppm");
+    createCollisionImage(&tabela_hash_2, "PictureTableHash_2.ppm");
     fclose (hash_2);
+}
+void createCollisionImage(const HashStruct *hashStruct, const char *filename) {
+    FILE *imageFile = fopen(filename, "w");
+
+    if (imageFile) {
+        int max_density = 0;
+
+        // Encontre a densidade máxima na tabela
+        for (int i = 0; i < MAX; i++) {
+            int density = hashStruct->hashes[i].size;
+            max_density = (density > max_density) ? density : max_density;
+        }
+
+        // Escreva o cabeçalho PPM no arquivo
+        fprintf(imageFile, "P3\n");
+        fprintf(imageFile, "32 32\n"); // Largura  x Altura 
+        fprintf(imageFile, "255\n");   // Valor máximo de cor
+
+        for (int i = 0; i < 32; i++) {
+            for (int j = 0; j < 32; j++) {
+                int density = hashStruct->hashes[i * 32 + j].size;
+
+                // Calcule o valor de cor com base na densidade de colisões
+                int color = (int)((density / (double)max_density) * 255);
+
+                // Escreve o valor de cor no arquivo PPM
+                fprintf(imageFile, "%d 0 100 ", color);
+            }
+        }
+
+        fclose(imageFile);
+        printf("Imagem PPM gerada com sucesso: %s\n", filename);
+    } else {
+        printf("Erro ao criar o arquivo de imagem PPM.\n");
+    }
 }
