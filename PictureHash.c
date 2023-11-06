@@ -49,17 +49,16 @@ void main ()
 }
 void createCollisionImage(const HashStruct *hashStruct, const char *filename) {
     FILE *imageFile = fopen(filename, "w");
-
     if (imageFile) {
         int max_density = 0;
 
-        // Encontre a densidade máxima na tabela
+        // Encontra a densidade máxima na tabela
         for (int i = 0; i < MAX; i++) {
             int density = hashStruct->hashes[i].size;
             max_density = (density > max_density) ? density : max_density;
         }
 
-        // Escreva o cabeçalho PPM no arquivo
+        // Escreve o cabeçalho PPM no arquivo
         fprintf(imageFile, "P3\n");
         fprintf(imageFile, "32 32\n"); // Largura  x Altura 
         fprintf(imageFile, "255\n");   // Valor máximo de cor
@@ -68,7 +67,7 @@ void createCollisionImage(const HashStruct *hashStruct, const char *filename) {
             for (int j = 0; j < 32; j++) {
                 int density = hashStruct->hashes[i * 32 + j].size;
 
-                // Calcule o valor de cor com base na densidade de colisões
+                // Calcule o valor de cor com base na densidade -> colisões
                 int color = (int)((density / (double)max_density) * 255);
 
                 // Escreve o valor de cor no arquivo PPM
