@@ -1,7 +1,7 @@
 #ifndef EstruturaDeDados_Hash_h
 #define EstruturaDeDados_Hash_h
 #include "DoublyLinkedList.h"
-#define MAX 24
+#define MAX 1024
 
 typedef struct HashStruct {
     DoublyLinkedList hashes[MAX];
@@ -19,5 +19,6 @@ void showHashStruct(HashStruct *hashStruct, printNode print);
 bool containsKey_2(HashStruct *hashStruct, char *key, compare equal);
 int hash_2(char *key);
 int put_2(HashStruct *hashStruct, char *key, void *data, compare equal);
+void createCollisionImage(const HashStruct *hashStruct, const char *filename);
 
 #endif

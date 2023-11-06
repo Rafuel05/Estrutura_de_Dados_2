@@ -19,7 +19,7 @@ void main ()
    log_set_level(5);
     FILE * hash;
     char *linha;
-    hash = fopen ("teste.txt","r");
+    hash = fopen ("ListaDePalavrasPT.txt","r");
     HashStruct tabela_hash;
     initHash(&tabela_hash);
     if (hash){
@@ -31,11 +31,11 @@ void main ()
       linha = (char*)malloc(sizeof(char) * 100);
     }
     }
-    showHashStruct(&tabela_hash,printar);
+    //showHashStruct(&tabela_hash,printar);
     fclose (hash);
     printf ("\ngit stat===========\nSegunda tabela Hash\n============\n");
     FILE * hash_2;
-    hash_2 = fopen ("teste.txt","r");
+    hash_2 = fopen ("ListaDePalavrasPT.txt","r");
     HashStruct tabela_hash_2;
     initHash(&tabela_hash_2);
     if (hash_2){
@@ -47,8 +47,8 @@ void main ()
       linha = (char*)malloc(sizeof(char) * 100);
     }
     }
-    showHashStruct(&tabela_hash_2,printar);
+    //showHashStruct(&tabela_hash_2,printar);
+    createCollisionImage(&tabela_hash, "imagem_tabela1.ppm");
+    createCollisionImage(&tabela_hash_2, "imagem_tabela2.ppm");
     fclose (hash_2);
-  
-
 }
