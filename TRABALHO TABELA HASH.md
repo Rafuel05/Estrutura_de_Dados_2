@@ -19,3 +19,10 @@
   - Este segundo por sua vez foi usada uma função utilizando numeros primos.
     
 ![Imagem Boa](https://github.com/Rafuel05/Estrutura_de_Dados_2/blob/main/img/Grafico_Hash.2.jpeg?raw=true)
+
+# Considerações finais:
+
+ Após finalizar o trabalho proposto, foi possivel perceber que existem diversas maneiras de espalhar as palavras pela tabela hash, a melhor solução encontrada pela dupla foi que utilizar numeros primos faz com que haja um espalhamento mais eficiente. 
+ 
+
+
