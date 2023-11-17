@@ -63,3 +63,17 @@ Hash:clean
 	@echo ======================================================
 	@echo
 	@./Hash 
+	
+Tree:clean 
+	@echo
+	@echo ==========================
+	@echo      TRABALHO ARVORE 
+	@echo ==========================
+	@echo Compilando o programa aciiTableTree
+	@gcc -std=c99  -DLOG_USE_COLOR log.h log.c aciiTableTree.c DoublyLinkedList.h DoublyLinkedList.c -o Tree
+	@echo Tornando o arquivo executável 
+	@chmod +x Tree
+	@echo Executando o programa Tree
+	@echo ======================================================
+	@echo
+	@./Tree
