@@ -88,7 +88,7 @@ for (int i = 0; i < ASCII_SIZE; i++) {
        // strcat(str1, str2);
        // novoNo->caracter = str1[0];
        // printf( "%c - ", novoNo->caracter);
-        printf ("interaçao:N. %d -> %d   \n",cnt,novoNo->contador);
+        printf ("N. %d -> %d + %d =  %d   \n",cnt,ch_1->contador,ch_2->contador,novoNo->contador);
         novoNo->esquerda = ch_1;
         novoNo->direita = ch_1;
         enqueue(&lista,novoNo);
