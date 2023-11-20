@@ -70,7 +70,7 @@ Tree:clean
 	@echo      TRABALHO ARVORE 
 	@echo ==========================
 	@echo Compilando o programa aciiTableTree
-	@gcc -std=c99  -DLOG_USE_COLOR log.h log.c aciiTableTree.c DoublyLinkedList.h DoublyLinkedList.c -o Tree
+	@gcc -std=c99  -DLOG_USE_COLOR log.h log.c aciiTableTree.c LinkedList.h LinkedList.c -o Tree
 	@echo Tornando o arquivo executável 
 	@chmod +x Tree
 	@echo Executando o programa Tree
